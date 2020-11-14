@@ -6,7 +6,6 @@ from generator.helpers import Mongo
 class UniqueIdHandler(BaseHandler):
     def handle(self) -> (list, dict):
         try:
-            print('kaan')
             collection = self.config.get('MONGO_ID')
             mongo = Mongo(collection=collection)
             page = self.filters.get('page', 1)
@@ -19,6 +18,7 @@ class UniqueIdHandler(BaseHandler):
             }
 
         except Exception as ex:
+            print("Exception: ", ex)
             result = []
 
         return result

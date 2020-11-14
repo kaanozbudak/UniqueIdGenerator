@@ -16,7 +16,6 @@ class Mongo(metaclass=_Base):
                 self._client = MongoClient(self.config.MONGO_ADDRESS_URI)
                 self.check_status()
                 self._database = self._client[self.config.MONGO_DB_NAME]
-                self._database.authenticate(self.config.MONGO_USER, self.config.MONGO_PASSWORD)
             else:
                 uri = 'mongodb://{username}:{password}@{host}:{port}/{database_name}'.format(
                     username=self.config.MONGO_USER,
