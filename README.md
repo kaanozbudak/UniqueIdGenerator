@@ -1,15 +1,17 @@
 Technologies Used:
-- Mongo
-- MongoDB Compass
-- Docker
+- Python 3.8
 - Flask
-- Postman
-- Pycharm
+- Mongo
+- Docker
 - DotEnv
 - Virtual Environment
+- Pycharm
+- MongoDB Compass
+- Postman
+- MacOS
 
 
-Make sure use MakeFile
+Check for sure MakeFile
 
 
 Installation:

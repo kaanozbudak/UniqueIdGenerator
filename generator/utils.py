@@ -1,14 +1,9 @@
 import os
 import logging
-import urllib.parse
+import csv
 from datetime import datetime
-from time import sleep
-
-from generator.exceptions import NotFoundError
-from generator import BASE_DIR
 
 logger = logging.getLogger('utils')
-import csv
 
 
 class InvalidConfigKey(Exception):
