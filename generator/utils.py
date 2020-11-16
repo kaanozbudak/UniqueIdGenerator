@@ -2,6 +2,8 @@ import os
 import logging
 import csv
 from datetime import datetime
+from generator import BASE_DIR
+from cryptography.fernet import Fernet
 
 logger = logging.getLogger('utils')
 
@@ -216,3 +218,7 @@ def _read_csv(path):
         reader = csv.reader(file)
         for row in reader:
             print(row)
+
+
+def load_key():
+    return Fernet.generate_key()

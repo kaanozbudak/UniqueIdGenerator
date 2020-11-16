@@ -77,7 +77,7 @@ class Mongo(metaclass=_Base):
 
     def find(self, query, parameters, to_json=True):
         """Find documents by query"""
-        found = self.collection.find(query, parameters)
+        found = self.collection.find(query, parameters, no_cursor_timeout=True)
 
         if not found:
             found = []
