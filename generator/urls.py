@@ -1,9 +1,9 @@
 from flask import Flask, Response
-from generator.controllers import generator
+from generator.controllers import get_data
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def index():
-    return Response(generator(), mimetype='text/event-stream')
+    return Response(get_data(), mimetype="text/html")

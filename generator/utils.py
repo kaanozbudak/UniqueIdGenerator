@@ -2,8 +2,6 @@ import os
 import logging
 import csv
 from datetime import datetime
-from generator import BASE_DIR
-from cryptography.fernet import Fernet
 
 logger = logging.getLogger('utils')
 
@@ -213,12 +211,11 @@ def get_mongo_data(collection, start_time, end_time, temp_filter, many=True):
     return found
 
 
-def _read_csv(path):
+def read_csv(path):
+    hash_code = ''
     with open(path, 'r') as file:
         reader = csv.reader(file)
         for row in reader:
-            print(row)
+            hash_code = row[0]
 
-
-def load_key():
-    return Fernet.generate_key()
+    return hash_code

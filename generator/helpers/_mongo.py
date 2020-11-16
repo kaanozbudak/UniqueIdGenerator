@@ -60,7 +60,7 @@ class Mongo(metaclass=_Base):
         """Find documents by filter_"""
         # page: 1, row_count: 10, skip
 
-        found = self.collection.find(filter_, projection)
+        found = self.collection.find(filter_, projection).sort('created_at', 1)
         if skip is not None:
             limit = int(limit) if limit else 10
             skip = (int(skip) - 1) * limit or 0
