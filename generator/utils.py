@@ -2,6 +2,9 @@ import os
 import logging
 import csv
 from datetime import datetime
+import hashlib
+import random
+import uuid
 
 logger = logging.getLogger('utils')
 
@@ -149,24 +152,6 @@ class Config:
         os.environ[key] = value
 
 
-def create_folders(*folders):
-    """
-    Utility for creating directories
-
-    >>> create_folders('/tmp/_1', '/tmp/_2', '/tmp/_3', '/tmp/_4')
-    >>> assert os.path.isdir('/tmp/_1')
-    >>> assert os.path.isdir('/tmp/_2')
-    >>> assert os.path.isdir('/tmp/_3')
-    >>> assert os.path.isdir('/tmp/_4')
-
-
-    :param folders: path or paths to for folder
-    :return:
-    """
-    for folder in folders:
-        os.makedirs(folder)
-
-
 def format_date(date: datetime, fmt="%d/%m/%Y %H:%M:%S") -> str:
     """
     Utility for formatting given date
@@ -219,3 +204,32 @@ def read_csv(path):
             hash_code = row[0]
 
     return hash_code
+
+
+def clear_data():
+    from generator.helpers import Mongo, Redis
+
+    config = Config()
+    # Mongo DB
+    collection = config.get('MONGO_HASH')
+    mongo = Mongo(collection=collection)
+
+    # Redis DB
+    redis = Redis(host=config.get('REDIS_HOST'),
+                  port=config.get('REDIS_PORT'),
+                  db=config.get('REDIS_DB'))
+
+    mongo.collection.drop()
+    redis.delete_all_keys()
+
+
+def generate_new_hash_code(code):
+    return hashlib.md5((code + str(random.getrandbits(32))).encode()).hexdigest()
+
+
+def generate_unique_id():
+    id1 = str(uuid.uuid4())
+    id2 = str(uuid.uuid4())
+    id3 = str(uuid.uuid4())
+    unique_id_list = [id1, id2, id3]
+    return unique_id_list

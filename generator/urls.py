@@ -8,12 +8,10 @@ app = Flask(__name__, template_folder='templates')
 def index():
     if request.method == 'GET':
         return Response(
-            "<form action='/' method='post'><input type='submit' name='upvote' value='Submit for start watching"
-            "' /></form>", mimetype="text/html")
+            "<form action='/' method='post'><input type='submit' value='Submit for start watching"
+            "'/></form>", mimetype="text/html")
     elif request.method == 'POST':
-        print('post')
         return Response(get_data(), mimetype="text/html")
     else:
         print('method not allowed')
-    return 'fail'
-    # return Response(get_data(), mimetype="text/html")
+        return 'method not allowed'
