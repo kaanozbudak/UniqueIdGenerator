@@ -31,7 +31,7 @@ class Generator:
 
         initial_code = read_csv(self.config.get('CSV_PATH'))
 
-        loop_cycle_time = input('How many seconds do you want to generate')
+        loop_cycle_time = input('How many seconds do you want to generate\n')
         end_time = time.time() + int(loop_cycle_time)
 
         initial_unique_id_list = generate_unique_id()
@@ -54,7 +54,7 @@ class Generator:
         print('--------------')
         print("Total Count: " + str(count))
         print('--------------')
-        print('How many seconds it work: ' + str(loop_cycle_time))
+        print('How many seconds it worked: ' + str(loop_cycle_time))
 
     def generate_hash_codes(self, parent_hash_code):
         first_new_hash_code = generate_new_hash_code(parent_hash_code)
