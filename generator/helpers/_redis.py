@@ -120,7 +120,7 @@ class Redis:
 
     def right_pop(self, key):
         result = []
-        print(self.instance.llen(key))
+        # print(self.instance.llen(key))
         while self.instance.llen(key) != 0:
             result.append(self.instance.rpop(key))
         return result

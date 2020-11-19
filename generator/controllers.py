@@ -8,12 +8,13 @@ mongo = Mongo(collection=collection)
 
 
 def get_data():
+    temp = 0
     while True:
         count = mongo.count({})
         # yield data
         ts = TimeStamp()
-
-        yield "<li>Time: " + str(format_date(ts.to_datetime())) + " -- " + "Total Count: " + str(
-            count) + "</li>" + "<br><br>"
-        # yield "Count: " + str(count) + " --- Time ----> " + str(ts.to_datetime().strftime('%X')) + "<br><br>"
+        if temp != count:
+            yield "<li>Time: " + str(format_date(ts.to_datetime())) + " -- " + "Total Count: " + str(
+                count) + "</li>" + "<br><br>"
         sleep(2)
+        temp = count
