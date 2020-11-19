@@ -19,8 +19,6 @@ class Generator:
                            port=self.config.get('REDIS_PORT'),
                            db=self.config.get('REDIS_DB'))
 
-        self.ts = TimeStamp()
-
         # set recursion limit if do not system throw exception like maximum recursion dept
         sys.setrecursionlimit(10 ** 9)
         # clear data
@@ -33,21 +31,30 @@ class Generator:
 
         initial_code = read_csv(self.config.get('CSV_PATH'))
 
-        minute = input('How many minutes do you want to generate')
-        end_time = time.time() + (60 * int(minute))
+        loop_cycle_time = input('How many seconds do you want to generate')
+        end_time = time.time() + int(loop_cycle_time)
 
         initial_unique_id_list = generate_unique_id()
         self.mongo_insert(initial_code, None, initial_unique_id_list)
         self.generate_hash_codes(initial_code)
-        # print("Start Time: " + " -- " + str(format_date(self.ts.to_datetime())))
-        print(end_time)
-        while True:
-            if time.time() > end_time:
-                break
+        ts = TimeStamp()
+        print('--------------')
+        print("Start Time:" + " -- " + str(format_date(ts.to_datetime())))
+        flag = True
+        while flag:
             redis_pop = self.redis.right_pop('hash')
             for key in redis_pop:
                 self.generate_hash_codes(key)
-            print(time.time())
+                if time.time() > end_time:
+                    ts = TimeStamp()
+                    print("End Time:" + " -- " + str(format_date(ts.to_datetime())))
+                    flag = False
+                    break
+        count = self.mongo.count({})
+        print('--------------')
+        print("Total Count: " + str(count))
+        print('--------------')
+        print('How many seconds it work: ' + str(loop_cycle_time))
 
     def generate_hash_codes(self, parent_hash_code):
         first_new_hash_code = generate_new_hash_code(parent_hash_code)

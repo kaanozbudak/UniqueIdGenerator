@@ -1,3 +1,5 @@
+It is a project for hash codes spawning 
+
 Technologies Used:
 - Python 3.8
 - Flask
