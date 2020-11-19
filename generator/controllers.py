@@ -13,7 +13,8 @@ def get_data():
         count = mongo.count({})
         # yield data
         ts = TimeStamp()
-        if temp != count:
+
+        if temp != count or temp == 0:
             yield "<li>Time: " + str(format_date(ts.to_datetime())) + " -- " + "Total Count: " + str(
                 count) + "</li>" + "<br><br>"
         sleep(2)

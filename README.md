@@ -27,7 +27,7 @@ Installation:
 - _`docker run -d -p 27017:27017 mongo:latest`_
 - Check is mongodb up
 - _`docker ps`_
-
+===========================
 - Then setup Redis
 - Pull Redis 
 - _`docker pull redis`_
@@ -39,3 +39,8 @@ Installation:
 - _`docker ps`_
 - For redis-cli change container id
 - docker exec -it 518c818c83c4 redis-cli
+
+===========================
+- Create virtualenv and type make install
+- python generator/worker.py for generate data
+- python start.py for visualize them
