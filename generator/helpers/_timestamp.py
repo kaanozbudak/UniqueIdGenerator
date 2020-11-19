@@ -1,5 +1,4 @@
-from calendar import monthrange
-from datetime import datetime, timedelta
+from datetime import datetime
 from time import mktime
 
 __all__ = (

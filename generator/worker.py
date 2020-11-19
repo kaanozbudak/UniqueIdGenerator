@@ -1,5 +1,3 @@
-import uuid
-from datetime import timedelta, datetime
 from generator.helpers import Mongo, Redis, TimeStamp
 from generator.utils import Config, read_csv, clear_data, generate_new_hash_code, generate_unique_id, format_date
 import sys
@@ -67,7 +65,6 @@ class Generator:
         self.mongo_insert(second_new_hash_code, parent_hash_code, second_unique_id_list)
 
     def mongo_insert(self, hash_code, hash_parent, unique_id_list):
-
         if hash_parent:
             self.redis.insert_right_push('hash', hash_code)
         self.mongo.insert(
