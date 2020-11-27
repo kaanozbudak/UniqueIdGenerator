@@ -5,7 +5,6 @@ from datetime import datetime
 import hashlib
 import random
 import uuid
-from generator.helpers import Mongo, Redis
 
 logger = logging.getLogger('utils')
 
@@ -208,9 +207,11 @@ def read_csv(path):
 
 
 def clear_data():
+    from generator.helpers import Mongo, Redis
     config = Config()
     # Mongo DB
     collection = config.get('MONGO_HASH')
+
     mongo = Mongo(collection=collection)
 
     # Redis DB
